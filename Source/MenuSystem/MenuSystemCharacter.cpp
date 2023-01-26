@@ -71,7 +71,7 @@ AMenuSystemCharacter::AMenuSystemCharacter()
 	if (OnlineSubsystem)
 	{
 		OnlineSessionInterface = OnlineSubsystem->GetSessionInterface();
-		ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Blue, FString::Printf(TEXT("Found Subsystem %s"), *OnlineSubsystem->GetSubsystemName().ToString()));
+		ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Blue, FString::Printf(TEXT("Found Subsystem %s"), *OnlineSubsystem->GetSubsystemName().ToString()));
 	}
 
 }
@@ -151,19 +151,19 @@ void AMenuSystemCharacter::OnCreateSessionComplete(FName OnlineSessionName, bool
 {
 	if (bWasSuccessful)
 	{
-		ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Blue, FString::Printf(TEXT("Created session: %s"), *OnlineSessionName.ToString()));
+		ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Blue, FString::Printf(TEXT("Created session: %s"), *OnlineSessionName.ToString()));
 
 		UWorld* World = GetWorld();
 		if (World)
 		{
 			// Travel to lobby map and open it as listen server
 			World->ServerTravel(FString(TEXT("/Game/ThirdPerson/Maps/Lobby?listen")));
-			ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Blue, FString(TEXT("ServerTravelFinished")));
+			ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Blue, FString(TEXT("ServerTravelFinished")));
 		}
 	}
 	else
 	{
-		ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Red, FString(TEXT("Failed to create a session.")));
+		ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Red, FString(TEXT("Failed to create a session.")));
 	}
 }
 
@@ -184,11 +184,11 @@ void AMenuSystemCharacter::OnFindSessionComplete(bool bWasSuccessful)
 			FString MatchType;
 			Result.Session.SessionSettings.Get(FName(TEXT("MatchType")), MatchType);
 
-			ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Cyan, FString::Printf(TEXT("Id: %s, User: %s"), *Id, *User));
+			ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Cyan, FString::Printf(TEXT("Id: %s, User: %s"), *Id, *User));
 
 			if (MatchType == FString(TEXT("FreeForAll")))
 			{
-				ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Cyan, FString::Printf(TEXT("Joining Match Type: %s"), *MatchType));
+				ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Cyan, FString::Printf(TEXT("Joining Match Type: %s"), *MatchType));
 				
 				OnlineSessionInterface->AddOnFindSessionsCompleteDelegate_Handle(FindSessionCompleteDelegate);
 
@@ -199,7 +199,7 @@ void AMenuSystemCharacter::OnFindSessionComplete(bool bWasSuccessful)
 	}
 	else
 	{
-		ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Red, FString(TEXT("Failed to find a session.")));
+		ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Red, FString(TEXT("Failed to find a session.")));
 	}
 	
 }
@@ -214,7 +214,7 @@ void AMenuSystemCharacter::OnJoinSessionComplete(FName SessionName, EOnJoinSessi
 	FString ConnectInfo;
 	if (OnlineSessionInterface->GetResolvedConnectString(NAME_GameSession, ConnectInfo))
 	{
-		ADD_ON_SCREEN_DEBUG_MESSAGE(15.f, FColor::Blue, FString::Printf(TEXT("ConnectInfo: %s"), *ConnectInfo));
+		ADD_ON_SCREEN_DEBUG_MESSAGE(5.f, FColor::Blue, FString::Printf(TEXT("ConnectInfo: %s"), *ConnectInfo));
 
 		OnlineSessionInterface->AddOnJoinSessionCompleteDelegate_Handle(JoinSessionCompleteDelegate);
 
