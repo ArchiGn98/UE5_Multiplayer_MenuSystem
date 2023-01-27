@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "Subsystems/GameInstanceSubsystem.h"
 #include "Interfaces/OnlineSessionInterface.h"
-
 #include "MultiplayerSessionsSubsystem.generated.h"
 
 //
@@ -68,5 +67,9 @@ private:
 
 	FOnStartSessionCompleteDelegate StartSessionCompleteDeligate;
 	FDelegateHandle StartSessionCompleteDeligateHandle;
+
+	bool bCreateSessionOnDestroy = false;
+	int32 LastNumPublicConnections;
+	FString LastMatchType;
 
 };
